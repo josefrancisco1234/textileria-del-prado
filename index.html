@@ -352,7 +352,9 @@
 
     .tiktok-carousel { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
     .tiktok-slides {
-      width: 325px; overflow: hidden; border-radius: 16px;
+      width: 325px; overflow: hidden; border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 40px rgba(201,168,76,.08);
     }
     .tiktok-track {
       display: flex; gap: 0;
@@ -360,8 +362,11 @@
       will-change: transform;
     }
     .tiktok-track iframe {
-      flex-shrink: 0; width: 325px; height: 580px;
-      border: none; border-radius: 16px;
+      flex-shrink: 0;
+      width: 342px; /* wider than container to hide scrollbar */
+      height: 580px;
+      border: none;
+      margin-right: -17px; /* pull scrollbar out of view */
     }
     .tiktok-nav {
       display: flex; align-items: center; gap: 20px;
@@ -955,7 +960,7 @@
     });
     function goTo(i) {
       ttIdx = Math.max(0, Math.min(i, slides.length - 1));
-      track.style.transform = `translate3d(-${ttIdx * 325}px,0,0)`;
+      track.style.transform = `translate3d(-${ttIdx * 342}px,0,0)`;
       dots.querySelectorAll('.tiktok-dot').forEach((d, j) => d.classList.toggle('active', j === ttIdx));
     }
     document.getElementById('ttNext').addEventListener('click', () => goTo(ttIdx + 1));
