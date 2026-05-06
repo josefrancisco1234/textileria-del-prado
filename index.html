@@ -334,13 +334,13 @@
     #tiktok {
       background: var(--dark2);
       border-top: 1px solid var(--border);
-      padding: 100px 5%;
+      padding: 60px 5%;
     }
     .tiktok-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center;
     }
-    @media (max-width: 768px) { .tiktok-inner { grid-template-columns: 1fr; gap: 40px; } }
+    @media (max-width: 768px) { .tiktok-inner { grid-template-columns: 1fr; gap: 32px; } }
     .tiktok-info .section-tag { color: #ff2d55; }
     .tiktok-handle {
       display: inline-flex; align-items: center; gap: 8px;
@@ -352,9 +352,9 @@
 
     .tiktok-carousel { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
     .tiktok-slides {
-      width: 325px; overflow: hidden; border-radius: 20px;
+      width: 260px; overflow: hidden; border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 0 40px rgba(201,168,76,.08);
+      box-shadow: 0 0 32px rgba(201,168,76,.08);
     }
     .tiktok-track {
       display: flex; gap: 0;
@@ -362,11 +362,11 @@
       will-change: transform;
     }
     .tiktok-slide {
-      flex-shrink: 0; width: 325px; height: 580px;
+      flex-shrink: 0; width: 260px; height: 460px;
       overflow: hidden; position: relative;
     }
     .tiktok-slide iframe {
-      width: 342px; height: 580px;
+      width: 278px; height: 460px;
       border: none; position: absolute; top: 0; left: 0;
     }
     .tiktok-nav {
@@ -961,7 +961,7 @@
     });
     function goTo(i) {
       ttIdx = Math.max(0, Math.min(i, slides.length - 1));
-      track.style.transform = `translate3d(-${ttIdx * 325}px,0,0)`;
+      track.style.transform = `translate3d(-${ttIdx * 260}px,0,0)`;
       dots.querySelectorAll('.tiktok-dot').forEach((d, j) => d.classList.toggle('active', j === ttIdx));
     }
     document.getElementById('ttNext').addEventListener('click', () => goTo(ttIdx + 1));
