@@ -361,12 +361,13 @@
       transition: transform .4s ease;
       will-change: transform;
     }
-    .tiktok-track iframe {
-      flex-shrink: 0;
-      width: 342px; /* wider than container to hide scrollbar */
-      height: 580px;
-      border: none;
-      margin-right: -17px; /* pull scrollbar out of view */
+    .tiktok-slide {
+      flex-shrink: 0; width: 325px; height: 580px;
+      overflow: hidden; position: relative;
+    }
+    .tiktok-slide iframe {
+      width: 342px; height: 580px;
+      border: none; position: absolute; top: 0; left: 0;
     }
     .tiktok-nav {
       display: flex; align-items: center; gap: 20px;
@@ -815,12 +816,12 @@
     <div class="tiktok-carousel reveal">
       <div class="tiktok-slides">
         <div class="tiktok-track" id="tiktokTrack">
-          <iframe src="https://www.tiktok.com/embed/v2/7630964255583489301" allowfullscreen allow="encrypted-media"></iframe>
-          <iframe src="https://www.tiktok.com/embed/v2/7605727928327900437" allowfullscreen allow="encrypted-media"></iframe>
-          <iframe src="https://www.tiktok.com/embed/v2/7561511183455390997" allowfullscreen allow="encrypted-media"></iframe>
-          <iframe src="https://www.tiktok.com/embed/v2/7564481691285343508" allowfullscreen allow="encrypted-media"></iframe>
-          <iframe src="https://www.tiktok.com/embed/v2/7562268286574939413" allowfullscreen allow="encrypted-media"></iframe>
-          <iframe src="https://www.tiktok.com/embed/v2/7560087401138294037" allowfullscreen allow="encrypted-media"></iframe>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7630964255583489301" allowfullscreen allow="encrypted-media"></iframe></div>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7605727928327900437" allowfullscreen allow="encrypted-media"></iframe></div>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7561511183455390997" allowfullscreen allow="encrypted-media"></iframe></div>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7564481691285343508" allowfullscreen allow="encrypted-media"></iframe></div>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7562268286574939413" allowfullscreen allow="encrypted-media"></iframe></div>
+          <div class="tiktok-slide"><iframe src="https://www.tiktok.com/embed/v2/7560087401138294037" allowfullscreen allow="encrypted-media"></iframe></div>
         </div>
       </div>
       <div class="tiktok-nav">
@@ -960,7 +961,7 @@
     });
     function goTo(i) {
       ttIdx = Math.max(0, Math.min(i, slides.length - 1));
-      track.style.transform = `translate3d(-${ttIdx * 342}px,0,0)`;
+      track.style.transform = `translate3d(-${ttIdx * 325}px,0,0)`;
       dots.querySelectorAll('.tiktok-dot').forEach((d, j) => d.classList.toggle('active', j === ttIdx));
     }
     document.getElementById('ttNext').addEventListener('click', () => goTo(ttIdx + 1));
