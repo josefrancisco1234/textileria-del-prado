@@ -330,6 +330,54 @@
     }
     .reviews-nav button:hover { border-color: var(--gold); background: rgba(201,168,76,.1); }
 
+    /* ── TIKTOK ──────────────────────────────── */
+    #tiktok {
+      background: var(--dark2);
+      border-top: 1px solid var(--border);
+      padding: 100px 5%;
+    }
+    .tiktok-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    @media (max-width: 768px) { .tiktok-inner { grid-template-columns: 1fr; gap: 40px; } }
+    .tiktok-info .section-tag { color: #ff2d55; }
+    .tiktok-handle {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 24px; color: var(--muted); font-size: .9rem;
+      text-decoration: none; transition: color .2s;
+    }
+    .tiktok-handle:hover { color: #ff2d55; }
+    .tiktok-handle svg { width: 20px; height: 20px; fill: #ff2d55; }
+
+    .tiktok-carousel { position: relative; }
+    .tiktok-slides { overflow: hidden; border-radius: 16px; }
+    .tiktok-track {
+      display: flex;
+      transition: transform .4s ease;
+      will-change: transform;
+    }
+    .tiktok-track iframe {
+      flex-shrink: 0; width: 325px; height: 580px;
+      border: none; border-radius: 16px;
+    }
+    .tiktok-nav {
+      display: flex; gap: 10px; margin-top: 16px; justify-content: center;
+    }
+    .tiktok-nav button {
+      background: var(--dark3); border: 1px solid var(--border);
+      color: var(--text); width: 40px; height: 40px; border-radius: 50%;
+      cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, background .2s;
+    }
+    .tiktok-nav button:hover { border-color: #ff2d55; background: rgba(255,45,85,.1); }
+    .tiktok-dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+    .tiktok-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); cursor: pointer; transition: background .2s;
+    }
+    .tiktok-dot.active { background: #ff2d55; }
+
     /* ── WHY US ──────────────────────────────── */
     #nosotros {
       background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(201,168,76,.07) 0%, transparent 70%),
@@ -745,6 +793,38 @@
 </section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdpG53M7FnYpFK8uybel5o8V6u-e8DDV8&libraries=places&callback=initGoogleReviews" async defer></script>
 
+<!-- ═══════════════════════════════════ TIKTOK -->
+<section id="tiktok">
+  <div class="tiktok-inner">
+    <div class="tiktok-info reveal">
+      <div class="section-tag">Síguenos en TikTok</div>
+      <h2 class="section-title">Mira nuestro<br/><span>trabajo en vivo</span></h2>
+      <p class="section-sub">Pedidos reales, clientes reales. Cada video muestra lo que hacemos a diario en nuestra fábrica de Gamarra.</p>
+      <a class="tiktok-handle" href="https://www.tiktok.com/@textilesdelprado" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.22 8.22 0 0 0 4.83 1.55V6.79a4.85 4.85 0 0 1-1.06-.1z"/></svg>
+        @textilesdelprado
+      </a>
+    </div>
+    <div class="tiktok-carousel reveal">
+      <div class="tiktok-slides">
+        <div class="tiktok-track" id="tiktokTrack">
+          <iframe src="https://www.tiktok.com/embed/v2/7630964255583489301" allowfullscreen allow="encrypted-media"></iframe>
+          <iframe src="https://www.tiktok.com/embed/v2/7605727928327900437" allowfullscreen allow="encrypted-media"></iframe>
+          <iframe src="https://www.tiktok.com/embed/v2/7561511183455390997" allowfullscreen allow="encrypted-media"></iframe>
+          <iframe src="https://www.tiktok.com/embed/v2/7564481691285343508" allowfullscreen allow="encrypted-media"></iframe>
+          <iframe src="https://www.tiktok.com/embed/v2/7562268286574939413" allowfullscreen allow="encrypted-media"></iframe>
+          <iframe src="https://www.tiktok.com/embed/v2/7560087401138294037" allowfullscreen allow="encrypted-media"></iframe>
+        </div>
+      </div>
+      <div class="tiktok-nav">
+        <button id="ttPrev">&#8592;</button>
+        <button id="ttNext">&#8594;</button>
+      </div>
+      <div class="tiktok-dots" id="tiktokDots"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════ POR QUÉ NOSOTROS -->
 <section id="nosotros">
   <div class="why-inner">
@@ -858,6 +938,27 @@
     heroVid.src = heroVideos[heroIndex];
     heroVid.play();
   });
+
+  // TikTok carousel
+  (function() {
+    const track  = document.getElementById('tiktokTrack');
+    const dots   = document.getElementById('tiktokDots');
+    const slides = track.querySelectorAll('iframe');
+    let ttIdx = 0;
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'tiktok-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dots.appendChild(d);
+    });
+    function goTo(i) {
+      ttIdx = Math.max(0, Math.min(i, slides.length - 1));
+      track.style.transform = `translate3d(-${ttIdx * 325}px,0,0)`;
+      dots.querySelectorAll('.tiktok-dot').forEach((d, j) => d.classList.toggle('active', j === ttIdx));
+    }
+    document.getElementById('ttNext').addEventListener('click', () => goTo(ttIdx + 1));
+    document.getElementById('ttPrev').addEventListener('click', () => goTo(ttIdx - 1));
+  })();
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
